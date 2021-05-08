@@ -1,0 +1,49 @@
+body{
+  padding: 70px;
+}
+
+
+/*so by just doing this, i was not able to overwrite the color of jumbotron
+as i font by inspecting it that the color is defined with more specific way
+so i have ot use that to overwrite the color*/
+/*.jumbotron{
+  color: #2c3e50;
+}*/
+/*so took from inspect elements*/
+.jumbotron .h1, .jumbotron h1{
+  color: #2c3e50;
+}
+/*so by doing this, i couldn't overwrite the color
+because my style sheet is linked before the bootstrap stylesheet*/
+
+
+.navbar-inverse{
+  background: #2c3e50;
+}
+
+
+/*The technique works by positioning the image so that its top left corner is in the centre of its container. Then, a 2D translation moves it up and left by half its own width.
+The key here is that the percentage values passed to the translate function are relative to the element, not its container, as would be the case if we were to manipulate the element’s top and left properties instead.
+Note that the portrait format image has the class portrait, so that we can correctly scale it to fill its container.
+So there you go. A really simple CSS technique for centering and cropping thumbnails.*/
+
+.thumbnail {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+.thumbnail img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+.thumbnail img.portrait {
+  width: 100%;
+  height: auto;
+}

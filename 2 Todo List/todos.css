@@ -1,0 +1,24 @@
+body{
+	background: orange;
+}
+
+/*this will take all h1s in one go*/
+h1{
+	background: red;
+}
+
+li{
+	border: 2px solid red;
+}
+
+/*selectors*/
+/*now we take the id from the html file and put a '#' in front of it*/
+#special{
+	background: yellow;
+}
+
+/*to use a class we use a dot */
+/*text-decoration to modify the text*/
+.complete{
+	text-decoration: line-through;
+}

@@ -1,0 +1,29 @@
+p{
+	/*Content - width and highlight*/
+	/*we can use percentage instead of "px"
+	so it will be that percentage of the parent element
+	in this case the parent element is 'body'
+	so iif we change windows size, it will also change*/
+	/*width: 200px;*/
+	width: 50%;
+
+	/*Border*/
+	border: 2px solid blue;
+
+	/*padding*/
+	padding: 10px;
+
+	/*margin*/
+	/*to add all arounf margin*/
+	/*margin: 100px;*/
+
+	/*to select deiff values for all four side margins*/
+	/*top right bottom left*/
+	/*margin: 20px 40px 60px 10px;*/
+
+	/*using auto, it will automatically keep the element to the center*/
+	/*margin: 1px auto 1px auto;*/
+	/*or we can use only two fields
+	for top/bottom and left/right*/
+	margin: 1px auto;
+}

@@ -1,0 +1,60 @@
+/*changing fonts*/
+/*put the font name into "" inverted comman as if the name contains
+any no. then it would not be valid*/
+p{
+	font-family: arial;
+}
+
+/*h1{
+	font-family: impact;
+}*/
+
+/*custom fonts*/
+h1{
+	font-family: 'Indie Flower', cursive;
+}
+
+
+
+
+
+
+
+
+
+/*changing Font size*/
+
+h1{
+	font-size: 100px;
+}
+
+/*here we have used "em"
+it just doubled the font size of its parent elements
+such as i have took a piece of text from a paragraph and it takes that paragraph's font
+and doubled it to apply to the selected text from that paragraph*/
+span{
+	font-size: 2.0em;
+}
+
+/*font weight*/
+/*we can also use numbers 100 to 800
+where 100 is the lightest and 800 is heaviest*/
+p{
+	font-weight: bold;
+}
+
+/*line height*/
+/*here the no. entered is multiplies with the current line height of the paragraph*/
+p{
+	line-height: 2;
+}
+
+/*text align*/
+h1{
+	text-align: center;
+}
+
+/*text decoration*/
+p{
+	text-decoration: underline;
+}

@@ -1,0 +1,19 @@
+h1{
+	font-size: 40px;
+	font-weight: bold;
+	font-family: monospace;
+	margin: 1.66%;
+	text-transform: uppercase;
+}
+
+/*as i used 30% width for one image 
+so that 3 images can fit in 100% of the page
+and used the remaining 10% as the margin for the 3 images
+like 3 images wil have 6 margins in total (left and right)
+so we have 10% left
+hence 6/10 = 1.66*/
+img{
+	width: 30%;
+	float: left;
+	margin: 1.66%;
+}

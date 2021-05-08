@@ -1,0 +1,40 @@
+#content{
+	text-align: center;
+	padding-top: 25%;
+	/*now adding shadow to text
+		adding 3 layers shadow*/
+	text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+				 0px 8px 13px rgba(0,0,0,0.1),
+			   	 0px 18px 23px rgba(0,0,0,0.4);
+}
+
+body{
+	background: url(https://images.unsplash.com/photo-1548439739-0cf616cef1cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80);
+	/*cover will stretch the image to the sides
+	wont change the acpect ratio 
+	wont change the size of the image*/
+	background-size: cover; 
+	/*now positioning the image*/
+	background-position: center;
+	/*adding goole fonts*/
+	font-family: 'Baloo 2', cursive;
+	/*changing body color
+	it will not change the colors of button and other bootstrap items
+	as theya re more specific*/
+	color: white;
+}
+
+h1{
+	font-weight: 700;
+	font-size: 5em;
+}
+
+/*so now my html is small and it ends in the webpage but the container keep going
+so to end this i am asking the html to cover entire container*/
+html{
+	height: 100%;
+}
+
+hr{
+	width: 400px;
+}

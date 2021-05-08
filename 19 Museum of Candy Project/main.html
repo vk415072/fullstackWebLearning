@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museum of Candy</title>
+
+    <!-- bootstrap4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- my custom style sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- adding google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
+
+    <!-- NAVBAR -->
+
+    <!-- py = padding top and bottoom -->
+    <nav id="mainNavbar" class="navbar navbar-dark navbar-expand-md py-0 fixed-top">
+        <a href="" class="navbar-brand">CANDY</a>
+        <!-- adding navbar toggler btn for small screens -->
+        <!-- data-target: contains which links to collapse in
+        and filling it with a div's id that contains the links -->
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navLinks">
+            <!-- adding icon to it -->
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navLinks" class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-items">
+                    <a href="" class="nav-link">HOME</a>
+                </li>
+                <li class="nav-items">
+                    <a href="" class="nav-link">ABOUT</a>
+                </li>
+                <li class="nav-items">
+                    <a href="" class="nav-link">TICKETS</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <!-- 1st CONTAINER -->
+
+    <!-- adding a section of fluid container (it goes all the way accross the display) -->
+    <!-- px is padding left/right -->
+    <section class="container-fluid px-0">
+        <!-- flexbox property to align items -->
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <!-- d-none means to hide display -->
+                <!-- d-lg-block means to show the diplay after large -->
+                <div id="headingGroup" class="text-white text-center d-none d-lg-block mt-5">
+                    <h1 class="text-center display-2">MUSEUM <span>/</span>OF<span>/</span>CANDY</h1>
+                    <h1 class="text-center display-2">MUSEUM <span>/</span>OF<span>/</span>CANDY</h1>
+                    <h1 class="text-center display-2">MUSEUM <span>/</span>OF<span>/</span>CANDY</h1>
+                    <h1 class="text-center display-2">MUSEUM <span>/</span>OF<span>/</span>CANDY</h1>
+                    <h1 class="text-center display-2">MUSEUM <span>/</span>OF<span>/</span>CANDY</h1>
+                    <h1 class="text-center display-2">MUSEUM <span>/</span>OF<span>/</span>CANDY</h1>
+                    <h1 class="text-center display-2">MUSEUM <span>/</span>OF<span>/</span>CANDY</h1>
+                </div>
+            </div>
+            <!-- lg as we want col 6 from large -->
+            <div class="col-lg-6">
+                <!-- img-fluid is a bootstrap class that make the images responsive -->
+                <img class="img-fluid" src="images/hand2.png" alt="">
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- 2nd CONTAINER -->
+
+    <section class="container-fluid px-0">
+        <div class="row align-items-center contRows">
+            <!-- now we are using 'order' to maintain the order of the both colomns -->
+            <!-- order-1 will show first and so on -->
+            <!-- order-md-1 means it will go to order 1 once it hit the medium -->
+            <div class="col-md-6 order-2 order-md-1">
+                <img class="img-fluid" src="images/milk.png" alt="">
+            </div>
+            <div class="col-md-6 text-center order-1 order-md-2">
+                <!-- nexting more in the second half of the container -->
+                <!-- justify...center is one of the flex utility to make the columns of a row to be in center -->
+                <div class="row justify-content-center">
+                    <div class="col-10 col-8-lg cont2txt mb-5 mb-md-0">
+                        <h2>MUSEUM OF CANDY</h2>
+                        <!-- hidding image then showng once we hit large -->
+                        <img class="d-none d-lg-inline" src="images/lolli_icon.png" alt="">
+                        <!-- lead is just a fancy class -->
+                        <p class="lead">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore rem eum, obcaecati mollitia
+                            molestiae quas reprehenderit, debitis, cum iusto recusandae praesentium rerum explicabo
+                            facere!
+                            Laboriosam vel, recusandae eum optio libero impedit laudantium fugit dicta provident.
+                            Dolorum
+                            voluptate eaque aperiam nesciunt?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- 3rd CONTAINER -->
+
+    <section class="container-fluid px-0">
+        <div class="row align-items-center contRows">
+            <div class="col-md-6 text-center">
+                <div class="row justify-content-center">
+                    <div class="col-10 col-8-lg cont2txt mb-5 mb-md-0">
+                        <h2>MUSEUM OF CANDY</h2>
+                        <img class="d-none d-lg-inline" src="images/lolli_icon.png" alt="">
+                        <p class="lead">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore rem eum, obcaecati mollitia
+                            molestiae quas reprehenderit, debitis, cum iusto recusandae praesentium rerum explicabo
+                            facere!
+                            Laboriosam vel, recusandae eum optio libero impedit laudantium fugit dicta provident.
+                            Dolorum
+                            voluptate eaque aperiam nesciunt?
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img class="img-fluid" src="images/gumball.png" alt="">
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- 4th CONTAINER -->
+
+    <section class="container-fluid px-0">
+        <div class="row align-items-center contRows">
+            <div class="col-md-6 order-2 order-md-1">
+                <img class="img-fluid" src="images/sprinkles.png" alt="">
+            </div>
+            <div class="col-md-6 text-center order-1 order-md-2">
+                <div class="row justify-content-center">
+                    <div class="col-10 col-8-lg cont2txt mb-5 mb-md-0">
+                        <h2>MUSEUM OF CANDY</h2>
+                        <img class="d-none d-lg-inline" src="images/lolli_icon.png" alt="">
+                        <p class="lead">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore rem eum, obcaecati mollitia
+                            molestiae quas reprehenderit, debitis, cum iusto recusandae praesentium rerum explicabo
+                            facere!
+                            Laboriosam vel, recusandae eum optio libero impedit laudantium fugit dicta provident.
+                            Dolorum
+                            voluptate eaque aperiam nesciunt?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- JS stuff -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
+
+    <!-- javascript to detect if user has scrolled or not -->
+    <script>
+        $(function () {
+            $(document).scroll(function () {
+                var $nav = $("#mainNavbar");
+                // so if we scroll more then the height of navbar then it will trigger the scrolled class
+                $nav.toggleClass("scrolled", $(this).scrollTop() > $nav.height());
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>

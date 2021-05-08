@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registeration</title>
+</head>
+<body>
+
+	<h1>Register</h1>
+
+	<form>
+		<!-- Notes:
+		1. required for mendatory fields
+		2. placeholder for shallow filling -->
+		<label for="fn">First Name</label>
+		<input type="text" name="First Name" id="fn" placeholder="Vivek" required>
+
+		<label for="lm">Last Name</label>
+		<input type="text" name="Last Name" id="lm" placeholder="Sengar" required>
+
+		<!-- or we can nest the label and input like:
+		 
+		 	<label>
+		 		<input type="text" name="Last Name" placeholder="Sengar" required>
+		 	</label>
+
+		 	there is not need of 'for' and 'id' 
+		 -->
+
+		<!-- notes:
+		1. 'for' and 'id' for relation
+		2. same name so that we can select only one of them
+		3. name is used behind the scenes like how to send the data
+		4. value to return the selected into the URL -->
+		<div>
+			<label for="male">Male</label>
+			<input type="radio" name="gender" value="male" id="male">
+
+			<label for="female">Female</label>
+			<input type="radio" name="gender" value="female" id="female">
+
+			<label for="other">Other</label>
+			<input type="radio" name="gender" value="other" id="other">
+		</div>
+
+		<div>
+			<label for="email">Email</label>
+			<input type="email" name="email" placeholder="your email" id="email" required>
+
+			<label for="pass">Password</label>
+			<!-- here i have used some code for setting min/max pass lenght -->
+			<input type="password" name="pass" placeholder="password" id="pass" pattern=".{5,10}" required title="5 to 10 characters">
+		</div>
+
+		<div>
+			<label>
+				Birthday:
+				<select name="month">
+					<option>Month</option>
+					<option>Jan</option>
+					<option>Feb</option>
+					<option>March</option>
+				</select>
+				<select name="day">
+					<option>Day</option>
+					<option>01</option>
+					<option>02</option>
+					<option>03</option>
+				</select>
+				<select name="year">
+					<option>Year</option>
+					<option>1997</option>
+					<option>1996</option>
+					<option>1995</option>
+				</select>
+			</label>
+		</div>
+
+		<div>
+			<label>
+				I agree to the terms and conditions:
+				<input type="checkbox" name="agreed">
+			</label>
+		</div>
+
+		<input type="Submit">	
+	</form>
+
+</body>
+</html>
