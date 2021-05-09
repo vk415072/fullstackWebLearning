@@ -33,6 +33,13 @@ app.get('/r/:subreddit', (req, res) =>{
 });
 
 
+// now sending an arrey of cats to another ejs file
+app.get('/cats', (req, res) =>{
+    const cats = ['dolly', 'monty', 'tiger', 'TJ', 'Molly'];
+    res.render('cats.ejs', {cats});
+})
+
+
 app.listen(3000, () => {
     console.log('listening on 3000');
 });
