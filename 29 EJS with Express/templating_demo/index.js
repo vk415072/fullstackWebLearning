@@ -12,6 +12,11 @@ app.set('view engine', 'ejs');
 
 // now taking the current dir name and joining it to /views. as the /views will not work if i run index.js from a diff. path.
 app.set('views', path.join(__dirname, '/views'))
+// similarly, serving css files to the ejs files
+// creating public folder which contains css file.
+// app.use(express.static('public'));
+// now join its path
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', (req, res) => {
     // res.send('Hi!');
@@ -39,9 +44,9 @@ app.get('/r/:subreddit', (req, res) => {
     if (data) {
         // spreading all jason data with "..."
         res.render('subreddit', { ...data });
-    }else{
+    } else {
         // creating another ejs file for that
-        res.render('notfound', {subreddit});
+        res.render('notfound', { subreddit });
     }
 });
 
