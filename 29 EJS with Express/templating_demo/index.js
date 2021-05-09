@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 // now taking the current dir name and joining it to /views. as the /views will not work if i run index.js from a diff. path.
 app.set('views', path.join(__dirname, '/views'))
 // similarly, serving css files to the ejs files
-// creating public folder which contains css file.
+// creating public folder which contains css file. (dowsn't have to be public.)
 // app.use(express.static('public'));
 // now join its path
 app.use(express.static(path.join(__dirname, 'public')))
