@@ -26,6 +26,12 @@ app.get('/rand', (req, res) =>{
 });
 
 
+// now passing the url term to new ejs file
+app.get('/r/:subreddit', (req, res) =>{
+    const {subreddit} = req.params;
+    res.render('subreddit', {subreddit});
+});
+
 
 app.listen(3000, () => {
     console.log('listening on 3000');
