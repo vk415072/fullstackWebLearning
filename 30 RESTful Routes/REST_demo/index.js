@@ -6,20 +6,22 @@ const app = express();
 const path = require('path');
 // 19. now creating new ids for new comments using UUID node package
 // 20. and replacing hard code ids
-const { v4 : uuid } = require('uuid');
-// 20. uuid is custom name
+const { v4: uuid } = require('uuid');
+// 26. adding method-override node package
+const methodOverride = require('method-override')
+
 
 
 // 3. so to parse the body data type
 app.use(express.urlencoded({ ecyended: true }));
 // 5. similarly to parse the jason data:
 app.use(express.json());
-
 // 8. joining path of views ejs
 app.set('views', path.join(__dirname, 'views'));
-
 // 6. now setting view engine for ejs
 app.set('view engine', 'ejs')
+// 27. setting method-override
+app.use(methodOverride('_method'));
 
 
 
@@ -89,6 +91,28 @@ app.get('/comments/:id', (req, res) => {
     res.render('comments/show', { comment });
 })
 
+// 21. sending a patch req to update the comment
+app.patch('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    // 22. getting new comment text that was sent
+    const newCommentText = req.body.edit;
+    // console.log(req.body);
+    // 23. getting original comment of same id
+    const foundComment = comments.find(c => c.id === id);
+    // 24. updating the original comment
+    foundComment.comment = newCommentText;
+    // console.log(newCommentText);
+    // console.log(foundComment);
+    res.redirect('/comments');
+})
+
+// 25. going to the page to edit  comments
+app.get('/comments/:id/edit', (req, res) => {
+    const { id } = req.params;
+    const comment = comments.find(c => c.id === id);
+    // console.log(comment);
+    res.render('comments/edit.ejs', { comment })
+})
 
 
 
@@ -107,6 +131,8 @@ app.post('/tacos', (req, res) => {
     const { meat, qty } = req.body;
     res.send(`OK, here are your ${qty} ${meat} Taco!`)
 })
+
+
 
 
 app.listen(3000, () => {
