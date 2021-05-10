@@ -1,5 +1,6 @@
 const { json } = require('express');
 const express = require('express');
+const { parse } = require('path');
 const app = express();
 // 7. require path to join views ejs
 const path = require('path');
@@ -11,7 +12,7 @@ app.use(express.urlencoded({ ecyended: true }));
 app.use(express.json());
 
 // 8. joining path of views ejs
-app.set('views', path.join(__dirname, 'views')); 
+app.set('views', path.join(__dirname, 'views'));
 
 // 6. now setting view engine for ejs
 app.set('view engine', 'ejs')
@@ -21,22 +22,27 @@ app.set('view engine', 'ejs')
 // 9. making comments db
 const comments = [
     {
+        id: 1,
         username: 'Tod',
         comment: 'lol, that is so funny!'
     },
     {
+        id: 2,
         username: 'Vivek',
         comment: 'I like to go to movies with my friends'
     },
     {
+        id: 3,
         username: 'Shiv',
         comment: 'Plz delete your account, Tod'
     },
     {
+        id: 4,
         username: 'Elsa',
         comment: 'Woof, woof, woof!!!'
     },
     {
+        id: 5,
         username: 'Mike',
         comment: 'you owe me 10 bucks!'
     }
@@ -44,7 +50,7 @@ const comments = [
 
 // 10. render all comments to ejs
 app.get('/comments', (req, res) => {
-    res.render('comments/index.ejs', {comments})
+    res.render('comments/index.ejs', { comments })
 })
 
 // 11. now creating new comments
@@ -53,18 +59,28 @@ app.get('/comments/new', (req, res) => {
 })
 
 // 12. now saving that new comment using post method
-app.post('/comments', (req, res) =>{
+app.post('/comments', (req, res) => {
     // console.log(req.body);
-    const {username, comment} = req.body;
+    const { username, comment } = req.body;
     // 13. adding data to comments arrey
-    comments.push({username, comment}); 
+    comments.push({ username, comment });
     // res.send('it worked!');
     // 14. now after getting this response, if user reload the page,
     // 15. it will once again send the post req to the server for the same data.
     // 16. so, we've to redirect the user to another page also.
     // 17. redirecting to /comments
-    res.redirect('/comments'); 
+    res.redirect('/comments');
 })
+
+// 18. getting comment via id
+app.get('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    const comment = comments.find(c => c.id === parseInt(id));
+    // console.log(comment);
+    res.render('comments/show', { comment });
+})
+
+
 
 
 
