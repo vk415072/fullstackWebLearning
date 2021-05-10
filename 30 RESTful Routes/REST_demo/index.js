@@ -4,6 +4,10 @@ const { parse } = require('path');
 const app = express();
 // 7. require path to join views ejs
 const path = require('path');
+// 19. now creating new ids for new comments using UUID node package
+// 20. and replacing hard code ids
+const { v4 : uuid } = require('uuid');
+// 20. uuid is custom name
 
 
 // 3. so to parse the body data type
@@ -22,27 +26,32 @@ app.set('view engine', 'ejs')
 // 9. making comments db
 const comments = [
     {
-        id: 1,
+        // id: 1,
+        id: uuid(),
         username: 'Tod',
         comment: 'lol, that is so funny!'
     },
     {
-        id: 2,
+        // id: 2,
+        id: uuid(),
         username: 'Vivek',
         comment: 'I like to go to movies with my friends'
     },
     {
-        id: 3,
+        // id: 3,
+        id: uuid(),
         username: 'Shiv',
         comment: 'Plz delete your account, Tod'
     },
     {
-        id: 4,
+        // id: 4,
+        id: uuid(),
         username: 'Elsa',
         comment: 'Woof, woof, woof!!!'
     },
     {
-        id: 5,
+        // id: 5,
+        id: uuid(),
         username: 'Mike',
         comment: 'you owe me 10 bucks!'
     }
@@ -63,7 +72,7 @@ app.post('/comments', (req, res) => {
     // console.log(req.body);
     const { username, comment } = req.body;
     // 13. adding data to comments arrey
-    comments.push({ username, comment });
+    comments.push({ username, comment, id: uuid() });
     // res.send('it worked!');
     // 14. now after getting this response, if user reload the page,
     // 15. it will once again send the post req to the server for the same data.
@@ -75,7 +84,7 @@ app.post('/comments', (req, res) => {
 // 18. getting comment via id
 app.get('/comments/:id', (req, res) => {
     const { id } = req.params;
-    const comment = comments.find(c => c.id === parseInt(id));
+    const comment = comments.find(c => c.id === id);
     // console.log(comment);
     res.render('comments/show', { comment });
 })
