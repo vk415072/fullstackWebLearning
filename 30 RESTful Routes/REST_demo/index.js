@@ -47,6 +47,22 @@ app.get('/comments', (req, res) => {
     res.render('comments/index.ejs', {comments})
 })
 
+// 11. now creating new comments
+app.get('/comments/new', (req, res) => {
+    res.render('comments/new.ejs');
+})
+
+// 12. now saving that new comment using post method
+app.post('/comments', (req, res) =>{
+    // console.log(req.body);
+    const {username, comment} = req.body;
+    // adding data to comments arrey
+    comments.push({username, comment}); 
+    res.send('it worked!');
+})
+
+
+
 
 app.get('/tacos', (req, res) => {
     res.send('GET /tacos response');
