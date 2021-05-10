@@ -56,9 +56,14 @@ app.get('/comments/new', (req, res) => {
 app.post('/comments', (req, res) =>{
     // console.log(req.body);
     const {username, comment} = req.body;
-    // adding data to comments arrey
+    // 13. adding data to comments arrey
     comments.push({username, comment}); 
-    res.send('it worked!');
+    // res.send('it worked!');
+    // 14. now after getting this response, if user reload the page,
+    // 15. it will once again send the post req to the server for the same data.
+    // 16. so, we've to redirect the user to another page also.
+    // 17. redirecting to /comments
+    res.redirect('/comments'); 
 })
 
 
