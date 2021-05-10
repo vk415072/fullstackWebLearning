@@ -8,6 +8,7 @@ const path = require('path');
 // 20. and replacing hard code ids
 const { v4: uuid } = require('uuid');
 // 26. adding method-override node package
+// 27. we can't send a patch request from a ejs or html form so we have to fake it using methodoverride
 const methodOverride = require('method-override')
 
 
@@ -20,7 +21,7 @@ app.use(express.json());
 app.set('views', path.join(__dirname, 'views'));
 // 6. now setting view engine for ejs
 app.set('view engine', 'ejs')
-// 27. setting method-override
+// 28. setting method-override
 app.use(methodOverride('_method'));
 
 
