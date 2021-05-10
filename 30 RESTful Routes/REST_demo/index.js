@@ -27,7 +27,7 @@ app.use(methodOverride('_method'));
 
 
 // 9. making comments db
-const comments = [
+let comments = [
     {
         // id: 1,
         id: uuid(),
@@ -115,6 +115,14 @@ app.get('/comments/:id/edit', (req, res) => {
     res.render('comments/edit.ejs', { comment })
 })
 
+// 29. now deleting comments
+// 30. just like patch, we also can't send delete req from a html form
+app.delete('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    // 31. this return a new arrey that does not have that id which we want to delete
+    comments = comments.filter(c => c.id !== id);
+    res.redirect('/comments');
+})
 
 
 
