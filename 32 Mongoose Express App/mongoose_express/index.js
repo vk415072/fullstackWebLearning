@@ -35,8 +35,23 @@ app.set ('view engine', 'ejs');
 app.get('/products', async (req, res) => {
     const products = await Product.find({});
     // console.log(products);
+    // rendering index.ejs page and sending all products info to it.
     res.render('products/index.ejs', {products});
 })
+
+
+// 9. route for product with an id to access from show.ejs page
+app.get('/products/:id', async (req, res) => {
+    const {id} =  req.params;
+    const product = await Product.findById(id);
+    res.render('products/show.ejs', {product});
+})
+
+
+
+
+
+
 
 
 
