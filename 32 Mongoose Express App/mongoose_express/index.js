@@ -18,7 +18,7 @@ const Product = require('./models/product');
 
 
 // 2. basic app setup (2/3)
-app.set('view', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));
 app.set ('view engine', 'ejs');
 
 
@@ -27,6 +27,16 @@ app.set ('view engine', 'ejs');
 // app.get('/dog', (req, res) => {
 //     res.send('Woff!');
 // })
+
+
+
+// 7. route to show our Product db
+// 8. also making a async handler for this route as it will take time 
+app.get('/products', async (req, res) => {
+    const products = await Product.find({});
+    // console.log(products);
+    res.render('products/index.ejs', {products});
+})
 
 
 
