@@ -19,7 +19,7 @@ mongoose
 // 6. requiring our model
 const Product = require("./models/product");
 // 21. requiring method-override
-const methodOverride = require('method-override');
+const methodOverride = require("method-override");
 
 // 2. basic app setup (2/3)
 app.set("views", path.join(__dirname, "views"));
@@ -27,7 +27,7 @@ app.set("view engine", "ejs");
 // 11. in post req, we don't have access to req.body immediately, we need to tell express to use this middleware:
 app.use(express.urlencoded({ extended: true }));
 // 22. using method-override
-app.use(methodOverride('_method'));
+app.use(methodOverride("_method"));
 
 // // 4. testing basic route
 // app.get('/dog', (req, res) => {
@@ -77,14 +77,24 @@ app.get("/products/:id/edit", async (req, res) => {
 // 18. in put we are replacing the whole object.
 // 19. also we cant route put as the ejs form method is post so
 // 20. so we've to use method-override npm package
-app.put('/products/:id', async (req, res) => {
-    // console.log(req.body);
-    // res.send('PUT!!!');
-    const {id} = req.params;
-    // 23. updating to db
-    const product = await Product.findByIdAndUpdate(id, req.body, {runValidators: true, new: true});
-    res.redirect(`/products/${product._id}`);
-})
+app.put("/products/:id", async (req, res) => {
+  // console.log(req.body);
+  // res.send('PUT!!!');
+  const { id } = req.params;
+  // 23. updating to db
+  const product = await Product.findByIdAndUpdate(id, req.body, {
+    runValidators: true,
+    new: true,
+  });
+  res.redirect(`/products/${product._id}`);
+});
+
+// 24. delete route setup
+app.delete("/products/:id", async (req, res) => {
+  const { id } = req.params;
+  const deletedProduct = await Product.findByIdAndDelete(id);
+  res.redirect("/products");
+});
 
 // 3. basic app setup (3/3)
 app.listen(3000, () => {
