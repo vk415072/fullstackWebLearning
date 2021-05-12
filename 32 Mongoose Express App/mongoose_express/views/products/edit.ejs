@@ -31,9 +31,13 @@
 
       <label for="category">Select Category</label>
       <select name="category" id="category">
-        <option value="fruit">fruit</option>
-        <option value="vegetable">vegetable</option>
-        <option value="dairy">dairy</option>
+        <!-- the ""selected" tag selects the option to default in the list
+            but we have to dynamically apply it while reading from the db" 
+            so adding the condition within the space-->
+        <option value="fruit" <%= product.category === 'fruit' ? 'selected' : ''%>>fruit</option>
+        <option value="vegetable" <%= product.category === 'vegetable' ? 'selected' : ''%>>vegetable</option>
+        <option value="dairy" <%= product.category === 'dairy' ? 'selected' : ''%>>dairy</option>
+        <!-- we can add a for loop also, see vid for more details -->
       </select>
 
       <button>Add Product</button>
