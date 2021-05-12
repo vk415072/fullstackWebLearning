@@ -16,16 +16,18 @@ mongoose
     console.log("OH NO! MONGO CONNECTION ERROR!!");
     console.log(err);
   });
-
 // 6. requiring our model
 const Product = require("./models/product");
+// 21. requiring method-override
+const methodOverride = require('method-override');
 
 // 2. basic app setup (2/3)
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-
 // 11. in post req, we don't have access to req.body immediately, we need to tell express to use this middleware:
 app.use(express.urlencoded({ extended: true }));
+// 22. using method-override
+app.use(methodOverride('_method'));
 
 // // 4. testing basic route
 // app.get('/dog', (req, res) => {
@@ -60,8 +62,29 @@ app.post("/products", async (req, res) => {
   const newProduct = new Product(req.body);
   // 14. await & async as it takes time.
   await newProduct.save();
-  res.redirect('/products');
+  res.redirect("/products");
 });
+
+// 15. now making a get req route to serve the edit ejs form
+app.get("/products/:id/edit", async (req, res) => {
+  const { id } = req.params;
+  const product = await Product.findById(id);
+  res.render("products/edit.ejs", { product });
+});
+
+// 16. now adding a put req to overwrite the product details to db from edit.ejs
+// 17. in patch we change a portion of a doc but
+// 18. in put we are replacing the whole object.
+// 19. also we cant route put as the ejs form method is post so
+// 20. so we've to use method-override npm package
+app.put('/products/:id', async (req, res) => {
+    // console.log(req.body);
+    // res.send('PUT!!!');
+    const {id} = req.params;
+    // 23. updating to db
+    const product = await Product.findByIdAndUpdate(id, req.body, {runValidators: true, new: true});
+    res.redirect(`/products/${product._id}`);
+})
 
 // 3. basic app setup (3/3)
 app.listen(3000, () => {

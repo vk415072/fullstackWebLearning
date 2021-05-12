@@ -8,12 +8,13 @@
 </head>
 <body>
 
-    <h1>Product details</h1>
+    <h1>Product: <%= product.name %> </h1>
     <ul>
         <li>Price: <%= product.price %> </li>
         <li>Price: <%= product.category %> </li>
     </ul>
     <a href="/products">go back</a>
+    <a href="/products/<%= product._id %>/edit">edit</a>
     
 </body>
 </html>
