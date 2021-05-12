@@ -37,10 +37,18 @@ app.use(methodOverride("_method"));
 // 7. route to show our Product db
 // 8. also making a async handler for this route as it will take time
 app.get("/products", async (req, res) => {
-  const products = await Product.find({});
+  // 25.looking for category query from show.ejs page
+  const { category } = req.query;
+  //   const products = await Product.find({});
+  if (category) {
+    const products = await Product.find({ category });
+    // rendering index.ejs page and sending all products info to it.
+    res.render("products/index.ejs", { products, category });
+  } else {
+    const products = await Product.find({});
+    res.render("products/index.ejs", { products, category: 'All' });
+  }
   // console.log(products);
-  // rendering index.ejs page and sending all products info to it.
-  res.render("products/index.ejs", { products });
 });
 
 // 10. route for creating a new entry in db
