@@ -50,6 +50,26 @@ app.use("/dogs", (req, res, next) => {
   next();
 });
 
+// // 21. protecting every single route
+// app.use((req, res, next) => {
+//   const { password } = req.query;
+//   if (password === "pops") {
+//     next();
+//   }else{
+//       res.send("Sorry you need a password (?password=)")
+//   }
+// });
+
+// 22. specific function to protect particular the routes
+const verifyPassword = (req, res, next) => {
+  const { password } = req.query;
+  if (password === "pops") {
+    next();
+  } else {
+    res.send("Sorry you need a password (?password=)");
+  }
+};
+
 // 2. testing
 app.get("/", (req, res) => {
   // 17. using the requestTime from middleware
@@ -62,9 +82,14 @@ app.get("/dogs", (req, res) => {
   res.send("Woff! Woff!");
 });
 
+// 23. using verifyPassword
+app.get("/secret", verifyPassword, (req, res) => {
+  res.send("This is a secret page");
+});
+
 // 19. if nothing else was match then at the end:
 app.use((req, res) => {
-    // 20. also sending 404 status
+  // 20. also sending 404 status
   res.status(404).send("NOT FOUND");
 });
 
