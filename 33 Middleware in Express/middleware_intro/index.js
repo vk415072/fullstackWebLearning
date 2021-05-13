@@ -14,8 +14,22 @@ const morgan = require("morgan");
 // });
 
 // 7. now using morgan on similar function
-app.use(morgan('tiny'));
+app.use(morgan("tiny"));
 // 8. now this will use as a middleware if i go to any url. Also it will log the info.
+
+// 9. using next() to continue the chain of middleware.
+// 10. sp whatever i enter in url, these will execute.
+app.use((req, res, next) => {
+  console.log("This is my 1st middleware!");
+  next();
+  // 11. this will still execute but after all the chained middlewares
+  // 12. i can stop the execution after "next()"" if i add "return" before it
+  console.log("This is my 1st middleware - after calling next!");
+});
+app.use((req, res, next) => {
+  console.log("This is my 2nd middleware!");
+  next();
+});
 
 // 2. testing
 app.get("/", (req, res) => {
