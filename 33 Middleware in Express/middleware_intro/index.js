@@ -43,16 +43,29 @@ app.use((req, res, next) => {
   next();
 });
 
+// 17. creating a middleware that will only execute if /dogs
+// 18. if we get POST req then this will also execute but not the route handler (app.get) on comment no. 3
+app.use("/dogs", (req, res, next) => {
+  console.log("I love Dogs");
+  next();
+});
+
 // 2. testing
 app.get("/", (req, res) => {
-    // 17. using the requestTime from middleware
-    console.log(`REQUEST DATE: ${req.requestTime}`);
+  // 17. using the requestTime from middleware
+  console.log(`REQUEST DATE: ${req.requestTime}`);
   res.send("Home Page");
 });
 
-// 3. testing
+// 3. testing 2
 app.get("/dogs", (req, res) => {
   res.send("Woff! Woff!");
+});
+
+// 19. if nothing else was match then at the end:
+app.use((req, res) => {
+    // 20. also sending 404 status
+  res.status(404).send("NOT FOUND");
 });
 
 // 1. basic express app setup
