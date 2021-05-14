@@ -67,8 +67,8 @@ const verifyPassword = (req, res, next) => {
     next();
   } else {
     // res.send("Sorry you need a password (?password=)");
-    // 27. throwing custom error class
-    throw new Error('PASSWORD REQUIRED!')
+    // 27. throwing custom error
+    throw new Error("PASSWORD REQUIRED!");
   }
 };
 
@@ -100,6 +100,19 @@ app.get("/error", (req, res) => {
 app.use((req, res) => {
   // 20. also sending 404 status
   res.status(404).send("NOT FOUND");
+});
+
+// 28. (down at the bottom) writing custom error handling
+// 29. this will execute if get any error in routers.
+app.use((err, req, res, next) => {
+  console.log("**********************************");
+  console.log("***************ERROR**************");
+  console.log("**********************************");
+  res.status(500).send("WE GOT AN ERROR");
+  // 30. now if we use next() here, it will go to next middleware but not in case of error handling.
+  // 31. we need to pass the error with next()
+  //   console.log(err);
+  next(err);
 });
 
 // 1. basic express app setup
