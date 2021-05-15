@@ -5,6 +5,9 @@ const app = express();
 // 4. requiring morgan
 const morgan = require("morgan");
 
+// 32. requiring AppError (our custom class from appError.js)
+const AppError = require("./appError");
+
 // 5. executing morgan as per morgan docs, but cannot use it alone
 // morgan("tiny");
 
@@ -68,7 +71,9 @@ const verifyPassword = (req, res, next) => {
   } else {
     // res.send("Sorry you need a password (?password=)");
     // 27. throwing custom error
-    throw new Error("PASSWORD REQUIRED!");
+    // throw new Error("PASSWORD REQUIRED!");
+    // 33. now throwing custom error from our custom class
+    throw new AppError("PASSWORD REQUIRED!", 401);
   }
 };
 
@@ -102,17 +107,24 @@ app.use((req, res) => {
   res.status(404).send("NOT FOUND");
 });
 
-// 28. (down at the bottom) writing custom error handling
-// 29. this will execute if get any error in routers.
+// // 28. (down at the bottom) writing custom error handling
+// // 29. this will execute if get any error in routers.
+// app.use((err, req, res, next) => {
+//   console.log("**********************************");
+//   console.log("***************ERROR**************");
+//   console.log("**********************************");
+//   res.status(500).send("WE GOT AN ERROR");
+//   // 30. now if we use next() here, it will go to next middleware but not in case of error handling.
+//   // 31. we need to pass the error with next()
+//   //   console.log(err);
+//   next(err);
+// });
+
+// 34. using custom error handling (diff tech)
 app.use((err, req, res, next) => {
-  console.log("**********************************");
-  console.log("***************ERROR**************");
-  console.log("**********************************");
-  res.status(500).send("WE GOT AN ERROR");
-  // 30. now if we use next() here, it will go to next middleware but not in case of error handling.
-  // 31. we need to pass the error with next()
-  //   console.log(err);
-  next(err);
+  // 35. grabbing err.status
+  const { status } = err;
+  res.status(status).send("ERRORRRR!!!");
 });
 
 // 1. basic express app setup
