@@ -42,18 +42,23 @@ app.use(methodOverride("_method"));
 // 7. route to show our Product db
 // 8. also making a async handler for this route as it will take time
 app.get("/products", async (req, res) => {
-  // 25.looking for category query from show.ejs page
-  const { category } = req.query;
-  //   const products = await Product.find({});
-  if (category) {
-    const products = await Product.find({ category });
-    // rendering index.ejs page and sending all products info to it.
-    res.render("products/index.ejs", { products, category });
-  } else {
-    const products = await Product.find({});
-    res.render("products/index.ejs", { products, category: "All" });
+  // 39. adding try n catch
+  try {
+    // 25.looking for category query from show.ejs page
+    const { category } = req.query;
+    //   const products = await Product.find({});
+    if (category) {
+      const products = await Product.find({ category });
+      // rendering index.ejs page and sending all products info to it.
+      res.render("products/index.ejs", { products, category });
+    } else {
+      const products = await Product.find({});
+      res.render("products/index.ejs", { products, category: "All" });
+    }
+    // console.log(products);
+  } catch (e) {
+    next(e);
   }
-  // console.log(products);
 });
 
 // 10. route for creating a new entry in db
@@ -63,6 +68,7 @@ app.get("/products/new", (req, res) => {
 
 // 9. route for product with an id to access from show.ejs page
 app.get("/products/:id", async (req, res, next) => {
+  
   const { id } = req.params;
   const product = await Product.findById(id);
   // 31. adding error handling if product not found
@@ -76,13 +82,20 @@ app.get("/products/:id", async (req, res, next) => {
 });
 
 // 12. adding post req to get response after saving new.ejs form
-app.post("/products", async (req, res) => {
-  // console.log(req.body);
-  // 13. adding received new product entry from "/products" to Product db
-  const newProduct = new Product(req.body);
-  // 14. await & async as it takes time.
-  await newProduct.save();
-  res.redirect("/products");
+app.post("/products", async (req, res, next) => {
+  // 35. now if the errors ae not coming from our side then we can not call next(),
+  // 36. so we've to wrap it into a try n catch
+  try {
+    // console.log(req.body);
+    // 13. adding received new product entry from "/products" to Product db
+    const newProduct = new Product(req.body);
+    // 14. await & async as it takes time.
+    await newProduct.save();
+    res.redirect(`/products/${newProduct._id}`);
+  } catch (e) {
+    // 37. calling middleware with next with error. (also add next to prams).
+    next(e);
+  }
 });
 
 // 15. now making a get req route to serve the edit ejs form
@@ -97,16 +110,21 @@ app.get("/products/:id/edit", async (req, res) => {
 // 18. in put we are replacing the whole object.
 // 19. also we cant route put as the ejs form method is post so
 // 20. so we've to use method-override npm package
-app.put("/products/:id", async (req, res) => {
+app.put("/products/:id", async (req, res, next) => {
   // console.log(req.body);
   // res.send('PUT!!!');
-  const { id } = req.params;
-  // 23. updating to db
-  const product = await Product.findByIdAndUpdate(id, req.body, {
-    runValidators: true,
-    new: true,
-  });
-  res.redirect(`/products/${product._id}`);
+  // 38. adding try n catch
+  try {
+    const { id } = req.params;
+    // 23. updating to db
+    const product = await Product.findByIdAndUpdate(id, req.body, {
+      runValidators: true,
+      new: true,
+    });
+    res.redirect(`/products/${product._id}`);
+  } catch (e) {
+    next(e);
+  }
 });
 
 // 24. delete route setup
