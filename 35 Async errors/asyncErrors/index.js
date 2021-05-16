@@ -66,20 +66,44 @@ app.get("/products/new", (req, res) => {
   res.render("products/new.ejs");
 });
 
-// 9. route for product with an id to access from show.ejs page
-app.get("/products/:id", async (req, res, next) => {
-  
-  const { id } = req.params;
-  const product = await Product.findById(id);
-  // 31. adding error handling if product not found
-  // 32. but in async functions we need to call next() and pass the error to it
-  // 33. so that it can call our middleware function. (also adding next to prams).
-  if (!product) {
-    // 34. adding return to it so that res.render would not work after error and we would not get further errors.
-    return next(new AppError("Product not found", 400));
-  }
-  res.render("products/show.ejs", { product });
-});
+// // 9. route for product with an id to access from show.ejs page
+// app.get("/products/:id", async (req, res, next) => {
+
+//   const { id } = req.params;
+//   const product = await Product.findById(id);
+//   // 31. adding error handling if product not found
+//   // 32. but in async functions we need to call next() and pass the error to it
+//   // 33. so that it can call our middleware function. (also adding next to prams).
+//   if (!product) {
+//     // 34. adding return to it so that res.render would not work after error and we would not get further errors.
+//     return next(new AppError("Product not found", 400));
+//   }
+//   res.render("products/show.ejs", { product });
+// });
+// 40. but the problem is we have to add try n catch every time,
+// 41. so creating a custom function like wrapAsync() to handle try n catch.
+function wrapAsync(fn) {
+  return function (req, res, next) {
+    fn(req, res, next).catch((e) => next(e));
+  };
+}
+// 42. and wrapping our route with this custom function
+app.get(
+  "/products/:id",
+  wrapAsync(async (req, res, next) => {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    // 31. adding error handling if product not found
+    // 32. but in async functions we need to call next() and pass the error to it
+    // 33. so that it can call our middleware function. (also adding next to prams).
+    if (!product) {
+      // 34. adding return to it so that res.render would not work after error and we would not get further errors.
+      return next(new AppError("Product not found", 400));
+    }
+    res.render("products/show.ejs", { product });
+  })
+);
+// 43. now wew can wrap all our routes with this custom functions like the above
 
 // 12. adding post req to get response after saving new.ejs form
 app.post("/products", async (req, res, next) => {
