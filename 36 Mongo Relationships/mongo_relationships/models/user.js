@@ -1,3 +1,5 @@
+// DEMO OF ONE TO FEW DB
+
 // 1. including mongoose
 const mongoose = require("mongoose");
 
@@ -23,7 +25,7 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-// 6. pushing data
+// 6. making model
 const makeUser = async () => {
    const u = new User({ first: "Harry", last: "Potter" });
    u.address.push({ street: "123 Sesame St.", city: "New York", country: "USA" });
