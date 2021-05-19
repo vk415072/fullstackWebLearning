@@ -50,6 +50,13 @@ app.get("/farms/new", (req, res) => {
    res.render("farms/new");
 });
 
+// 34. farm rote with an id
+app.get("/farms/:id", async (req, res) => {
+   const { id } = req.params;
+   const farm = await Farm.findById(id);
+   res.render("farms/show.ejs", { farm });
+});
+
 // 29. new farm post req
 app.post("/farms", async (req, res) => {
    // 32. creating new Farm and saving to db
