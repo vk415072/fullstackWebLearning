@@ -16,7 +16,7 @@ const farmSchema = new Schema({
       required: [true, "Email required"],
    },
 //    4. attaching product
-   product: [
+   products: [
       {
          type: Schema.Types.ObjectId,
          ref: "Product",

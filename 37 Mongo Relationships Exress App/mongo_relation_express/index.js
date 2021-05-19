@@ -53,8 +53,15 @@ app.get("/farms/new", (req, res) => {
 // 34. farm rote with an id
 app.get("/farms/:id", async (req, res) => {
    const { id } = req.params;
-   const farm = await Farm.findById(id);
+   //  37. population products in farms
+   const farm = await (await Farm.findById(id)).populate("products");
    res.render("farms/show.ejs", { farm });
+});
+
+// 35. route from farm id with new product
+app.get("/farms/:id/products/new", (req, res) => {
+   const { id } = req.params;
+   res.render("products/new", { id });
 });
 
 // 29. new farm post req
@@ -63,6 +70,25 @@ app.post("/farms", async (req, res) => {
    const farm = new Farm(req.body);
    await farm.save();
    res.redirect("/farms");
+});
+
+// 36. post route form /farms/id/products
+app.post("/farms/:id/products", async (req, res) => {
+   const { id } = req.params;
+   const farm = await Farm.findById(id);
+   console.log("----------------");
+   console.log(farm);
+   console.log("------------------");
+   const { name, price, category } = req.body;
+   const product = new Product({ name, price, category });
+   console.log("----------------");
+   console.log(product);
+   console.log("------------------");
+   farm.products.push(product);
+   product.farm = farm;
+   await farm.save();
+   await product.save();
+   res.redirect(`/farms/${id}`);
 });
 
 // 26. Product Routes:
