@@ -28,10 +28,10 @@ app.get("/", (req, res) => {
    res.send("This is the homepage");
 });
 
+// user register routes
 app.get("/register", (req, res) => {
    res.render("register");
 });
-
 app.post("/register", async (req, res) => {
    const { password, username } = req.body;
    // generating hash code from password
@@ -44,6 +44,22 @@ app.post("/register", async (req, res) => {
    });
    await user.save();
    res.redirect("/");
+});
+
+// user login routes
+app.get("/login", (req, res) => {
+   res.render("login");
+});
+app.post("/login", async (req, res) => {
+   const { username, password } = req.body;
+   const user = await User.findOne({ username });
+   // comparing user pass with stored hash pass (user password first then hashed pass in params)
+   const validPass = await bcrypt.compare(password, user.password);
+   if (validPass) {
+      res.send("yeah! welcome");
+   } else {
+      res.send("try again");
+   }
 });
 
 app.get("/secret", (req, res) => {
