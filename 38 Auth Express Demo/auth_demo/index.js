@@ -24,7 +24,13 @@ app.set("views", "views");
 
 // parsing req.body
 app.use(express.urlencoded({ extended: true }));
-app.use(session({ secret: "notagoodsecret" }));
+app.use(
+   session({
+      secret: "notagoodsecret",
+      resave: true,
+      saveUninitialized: true,
+   })
+);
 
 app.get("/", (req, res) => {
    res.send("This is the homepage");
@@ -45,12 +51,10 @@ app.post("/register", async (req, res) => {
    const { password, username } = req.body;
    // generating hash code from password
    // 12 is the time taken to generate "password salt"
-   const hash = await bcrypt.hash(password, 12);
+   // const hash = await bcrypt.hash(password, 12);
+   // running a middleware from user schema to generate a bcrypt hash
    // saving hash to db
-   const user = new User({
-      username,
-      password: hash,
-   });
+   const user = new User({ username, password });
    await user.save();
    req.session.user_id = user._id;
    res.redirect("/");
@@ -62,12 +66,13 @@ app.get("/login", (req, res) => {
 });
 app.post("/login", async (req, res) => {
    const { username, password } = req.body;
-   const user = await User.findOne({ username });
-   // comparing user pass with stored hash pass (user password first then hashed pass in params)
-   const validPass = await bcrypt.compare(password, user.password);
-   if (validPass) {
+   //    const user = await User.findOne({ username });
+   //    // comparing user pass with stored hash pass (user password first then hashed pass in params)
+   //    const validPass = await bcrypt.compare(password, user.password);
+   const foundUser = await User.findAndValidate(username, password);
+   if (foundUser) {
       // setting session user id to our user's id
-      req.session.user_id = user._id;
+      req.session.user_id = foundUser._id;
       res.redirect("/secret");
    } else {
       res.redirect("/login");
