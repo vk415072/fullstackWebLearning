@@ -30,6 +30,13 @@ app.get("/", (req, res) => {
    res.send("This is the homepage");
 });
 
+const requireLogin = (req, res, next) => {
+   if (!req.session.user_id) {
+      return res.redirect("/login");
+   }
+   next();
+};
+
 // user register routes
 app.get("/register", (req, res) => {
    res.render("register");
@@ -70,15 +77,16 @@ app.post("/login", async (req, res) => {
 app.post("/logout", (req, res) => {
    req.session.user_id = null;
    // another method is to destroy that session entirely
-//    req.session.destroy();
+   //    req.session.destroy();
    res.redirect("/login");
 });
 
-app.get("/secret", (req, res) => {
-   if (!req.session.user_id) {
-      return res.redirect("/login");
-   }
+app.get("/secret", requireLogin, (req, res) => {
    res.render("secret");
+});
+
+app.get("/topsecret", requireLogin, (req, res) => {
+   res.send("This is top secret");
 });
 
 app.listen(3000, () => {
