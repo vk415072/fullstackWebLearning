@@ -61,18 +61,24 @@ app.post("/login", async (req, res) => {
    if (validPass) {
       // setting session user id to our user's id
       req.session.user_id = user._id;
-      res.send("yeah! welcome");
+      res.redirect("/secret");
    } else {
-      res.send("try again");
+      res.redirect("/login");
    }
+});
+
+app.post("/logout", (req, res) => {
+   req.session.user_id = null;
+   // another method is to destroy that session entirely
+//    req.session.destroy();
+   res.redirect("/login");
 });
 
 app.get("/secret", (req, res) => {
    if (!req.session.user_id) {
-      res.redirect("/login");
-   } else {
-      res.send("this is a secret! (You cannot see me unless logged in)");
+      return res.redirect("/login");
    }
+   res.render("secret");
 });
 
 app.listen(3000, () => {
